@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/FiveParent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FiveParent/CourseCommon" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FiveParent/CourseManagerDao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FiveParent/CourseManagerService" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/FiveParent/CourseManagerWeb" charset="UTF-8" />
+  </component>
+</project>

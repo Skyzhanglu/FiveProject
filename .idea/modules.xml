@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FiveParent/CourseCommon/CourseCommon.iml" filepath="$PROJECT_DIR$/FiveParent/CourseCommon/CourseCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FiveParent/CourseManagerDao/CourseManagerDao.iml" filepath="$PROJECT_DIR$/FiveParent/CourseManagerDao/CourseManagerDao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FiveParent/CourseManagerService/CourseManagerService.iml" filepath="$PROJECT_DIR$/FiveParent/CourseManagerService/CourseManagerService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FiveParent/CourseManagerWeb/CourseManagerWeb.iml" filepath="$PROJECT_DIR$/FiveParent/CourseManagerWeb/CourseManagerWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FiveParent/FiveParent.iml" filepath="$PROJECT_DIR$/FiveParent/FiveParent.iml" />
+    </modules>
+  </component>
+</project>

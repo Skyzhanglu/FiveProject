@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.course.dao.CourseMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.course.pojo.CourseMessage" >
+    <id column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="coach_id" property="coachId" jdbcType="BIGINT" />
+    <result column="equipment_id" property="equipmentId" jdbcType="BIGINT" />
+    <result column="site_id" property="siteId" jdbcType="BIGINT" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="class_time" property="classTime" jdbcType="VARCHAR" />
+    <result column="course_price" property="coursePrice" jdbcType="BIGINT" />
+    <result column="cimage_id" property="cimageId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.course.pojo.CourseMessage" extends="BaseResultMap" >
+    <result column="course_feature" property="courseFeature" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    course_id, course_name, type_id, coach_id, equipment_id, site_id, start_time, end_time, 
+    class_time, course_price, cimage_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    course_feature
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.course.pojo.CourseMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.course.pojo.CourseMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_message
+    where course_id = #{courseId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course_message
+    where course_id = #{courseId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.pojo.CourseMessageExample" >
+    delete from course_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.pojo.CourseMessage" >
+    insert into course_message (course_id, course_name, type_id, 
+      coach_id, equipment_id, site_id, 
+      start_time, end_time, class_time, 
+      course_price, cimage_id, course_feature
+      )
+    values (#{courseId,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, #{typeId,jdbcType=BIGINT}, 
+      #{coachId,jdbcType=BIGINT}, #{equipmentId,jdbcType=BIGINT}, #{siteId,jdbcType=BIGINT}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{classTime,jdbcType=VARCHAR}, 
+      #{coursePrice,jdbcType=BIGINT}, #{cimageId,jdbcType=BIGINT}, #{courseFeature,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.pojo.CourseMessage" >
+    insert into course_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="coachId != null" >
+        coach_id,
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id,
+      </if>
+      <if test="siteId != null" >
+        site_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="classTime != null" >
+        class_time,
+      </if>
+      <if test="coursePrice != null" >
+        course_price,
+      </if>
+      <if test="cimageId != null" >
+        cimage_id,
+      </if>
+      <if test="courseFeature != null" >
+        course_feature,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="coachId != null" >
+        #{coachId,jdbcType=BIGINT},
+      </if>
+      <if test="equipmentId != null" >
+        #{equipmentId,jdbcType=BIGINT},
+      </if>
+      <if test="siteId != null" >
+        #{siteId,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="classTime != null" >
+        #{classTime,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePrice != null" >
+        #{coursePrice,jdbcType=BIGINT},
+      </if>
+      <if test="cimageId != null" >
+        #{cimageId,jdbcType=BIGINT},
+      </if>
+      <if test="courseFeature != null" >
+        #{courseFeature,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.pojo.CourseMessageExample" resultType="java.lang.Integer" >
+    select count(*) from course_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_message
+    <set >
+      <if test="record.courseId != null" >
+        course_id = #{record.courseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.courseName != null" >
+        course_name = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null" >
+        type_id = #{record.typeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.coachId != null" >
+        coach_id = #{record.coachId,jdbcType=BIGINT},
+      </if>
+      <if test="record.equipmentId != null" >
+        equipment_id = #{record.equipmentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.siteId != null" >
+        site_id = #{record.siteId,jdbcType=BIGINT},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.classTime != null" >
+        class_time = #{record.classTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursePrice != null" >
+        course_price = #{record.coursePrice,jdbcType=BIGINT},
+      </if>
+      <if test="record.cimageId != null" >
+        cimage_id = #{record.cimageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.courseFeature != null" >
+        course_feature = #{record.courseFeature,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update course_message
+    set course_id = #{record.courseId,jdbcType=BIGINT},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=BIGINT},
+      coach_id = #{record.coachId,jdbcType=BIGINT},
+      equipment_id = #{record.equipmentId,jdbcType=BIGINT},
+      site_id = #{record.siteId,jdbcType=BIGINT},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      class_time = #{record.classTime,jdbcType=VARCHAR},
+      course_price = #{record.coursePrice,jdbcType=BIGINT},
+      cimage_id = #{record.cimageId,jdbcType=BIGINT},
+      course_feature = #{record.courseFeature,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_message
+    set course_id = #{record.courseId,jdbcType=BIGINT},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=BIGINT},
+      coach_id = #{record.coachId,jdbcType=BIGINT},
+      equipment_id = #{record.equipmentId,jdbcType=BIGINT},
+      site_id = #{record.siteId,jdbcType=BIGINT},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      class_time = #{record.classTime,jdbcType=VARCHAR},
+      course_price = #{record.coursePrice,jdbcType=BIGINT},
+      cimage_id = #{record.cimageId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.pojo.CourseMessage" >
+    update course_message
+    <set >
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="coachId != null" >
+        coach_id = #{coachId,jdbcType=BIGINT},
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id = #{equipmentId,jdbcType=BIGINT},
+      </if>
+      <if test="siteId != null" >
+        site_id = #{siteId,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="classTime != null" >
+        class_time = #{classTime,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePrice != null" >
+        course_price = #{coursePrice,jdbcType=BIGINT},
+      </if>
+      <if test="cimageId != null" >
+        cimage_id = #{cimageId,jdbcType=BIGINT},
+      </if>
+      <if test="courseFeature != null" >
+        course_feature = #{courseFeature,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where course_id = #{courseId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.course.pojo.CourseMessage" >
+    update course_message
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=BIGINT},
+      coach_id = #{coachId,jdbcType=BIGINT},
+      equipment_id = #{equipmentId,jdbcType=BIGINT},
+      site_id = #{siteId,jdbcType=BIGINT},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      class_time = #{classTime,jdbcType=VARCHAR},
+      course_price = #{coursePrice,jdbcType=BIGINT},
+      cimage_id = #{cimageId,jdbcType=BIGINT},
+      course_feature = #{courseFeature,jdbcType=LONGVARCHAR}
+    where course_id = #{courseId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.pojo.CourseMessage" >
+    update course_message
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=BIGINT},
+      coach_id = #{coachId,jdbcType=BIGINT},
+      equipment_id = #{equipmentId,jdbcType=BIGINT},
+      site_id = #{siteId,jdbcType=BIGINT},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      class_time = #{classTime,jdbcType=VARCHAR},
+      course_price = #{coursePrice,jdbcType=BIGINT},
+      cimage_id = #{cimageId,jdbcType=BIGINT}
+    where course_id = #{courseId,jdbcType=BIGINT}
+  </update>
+</mapper>
